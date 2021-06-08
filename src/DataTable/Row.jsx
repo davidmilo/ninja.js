@@ -1,18 +1,15 @@
-import React from 'react'
+import React from "react";
+import "./Row.scss";
 
-const Row = (props) => {
-  const { row } = props
-
-  return (
-    <tr>
-      <td>
-        <a href={row.edit_path}>
-          {row.name1}
-        </a><br />
-        <small>{row.email}</small>
-      </td>
-    </tr>
-  )
-}
-
-export default Row
+export const Row = ({ row: { edit_path, email, name1 } }) => (
+  <tr className="row">
+    <td>
+      <p className="row__text">
+        <a href={edit_path}>{name1}</a>
+      </p>
+      <p className="row__text row__text--small">
+        <small>{email}</small>
+      </p>
+    </td>
+  </tr>
+);

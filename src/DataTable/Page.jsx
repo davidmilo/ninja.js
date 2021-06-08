@@ -1,33 +1,24 @@
-import React from 'react'
+import React from "react";
+import { Button } from "./Button";
+import "./Page.scss";
 
-const Page = (props) => {
-  const { pageNumber, currentPageNumber, onChange } = props
+export const Page = ({ pageNumber, currentPageNumber, onChange }) => {
+  const isActivePage = () => currentPageNumber === pageNumber;
 
-  const isActivePage = () => {
-    return currentPageNumber == pageNumber
-  }
+  const handlePaginationClick = (event) => {
+    event.preventDefault();
+    onChange(pageNumber);
+  };
 
-  const renderedPageNumber = () => {
-    return pageNumber + 1
-  }
+  const buttonText = pageNumber + 1;
 
-  const click = (event) => {
-    event.preventDefault()
-    onChange(pageNumber)
-  }
-
-  if (isActivePage()) {
-    return(
-      <li className="page-item mr-1">
-        <button className="page-link button-outline" onClick={click} >{renderedPageNumber()}</button>
-      </li>
-    )
-  }
-  return(
-    <li className="page-item mr-1">
-      <button className="page-link" onClick={click} >{renderedPageNumber()}</button>
+  return (
+    <li className="page__item">
+      <Button
+        active={isActivePage()}
+        onClick={handlePaginationClick}
+        text={buttonText}
+      />
     </li>
-  )
-}
-
-export default Page
+  );
+};
