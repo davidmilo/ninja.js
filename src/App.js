@@ -1,5 +1,5 @@
 import React from "react";
-import { DataTable } from "./DataTable";
+import { DataTable } from "./containers/DataTable";
 import "./App.scss";
 
 export const App = ({ rows }) => (
