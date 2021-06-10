@@ -1,0 +1,7 @@
+.pagination {
+  list-style: none;
+  &__buttons {
+    display: inline-block;
+    margin: 0 0.5rem 0 0;
+  }
+}
