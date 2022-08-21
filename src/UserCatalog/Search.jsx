@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = ({ onSearch }) => {
+export const Search = ({ onSearch }) => {
   return (
     <div className="p-b-1">
       <input
@@ -12,5 +12,3 @@ const Search = ({ onSearch }) => {
     </div>
   );
 };
-
-export default Search;

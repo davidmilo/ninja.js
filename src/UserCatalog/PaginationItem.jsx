@@ -1,6 +1,10 @@
 import React from 'react';
 
-export const PaginationItem = ({ pageNumber, currentPageNumber, onChange }) => {
+const MemoizedPaginationItem = ({
+  pageNumber,
+  currentPageNumber,
+  onChange,
+}) => {
   const renderedPageNumber = () => {
     return pageNumber + 1;
   };
@@ -24,3 +28,5 @@ export const PaginationItem = ({ pageNumber, currentPageNumber, onChange }) => {
     </li>
   );
 };
+
+export const PaginationItem = React.memo(MemoizedPaginationItem);

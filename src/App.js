@@ -2,10 +2,10 @@ import React from 'react';
 import { UserCatalog } from './UserCatalog';
 import './App.css';
 
-const App = ({ rows }) => {
+const App = ({ users }) => {
   return (
     <div className="container mt-3">
-      <UserCatalog users={rows} locale="da" rowsPerPage={5} />
+      <UserCatalog users={users} locale="da" usersPerPage={5} />
     </div>
   );
 };

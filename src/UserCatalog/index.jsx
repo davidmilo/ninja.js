@@ -1,56 +1,57 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Pagination } from './Pagination';
-import Search from './Search';
+import { Search } from './Search';
 import { UserTable } from './UserTable';
 import { UserRow } from './UserRow';
 
-export const UserCatalog = ({ users, rowsPerPage }) => {
-  const [nrOfRows, setNrOfRows] = useState(users);
+export const UserCatalog = ({ users, usersPerPage }) => {
+  const [nrOfUsers, setNrOfUsers] = useState(users);
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
   const [totalNumberOfPages, setTotalNumberOfPages] = useState(0);
 
-  console.log('rows', users);
   useEffect(() => {
-    if (rowsPerPage === 0) {
+    if (usersPerPage === 0) {
       setTotalNumberOfPages(0);
-    } else setTotalNumberOfPages(Math.ceil(nrOfRows.length / rowsPerPage));
-  }, [rowsPerPage, nrOfRows.length]);
+    } else setTotalNumberOfPages(Math.ceil(nrOfUsers.length / usersPerPage));
+  }, [usersPerPage, nrOfUsers.length]);
 
   const searchUsers = (event) => {
     const text = event.target.value;
-    let rowsFound = users;
+    let usersFound = users;
 
     if (text) {
-      rowsFound = users.filter((row) => {
+      usersFound = users.filter((row) => {
         return (
           row.name1.toLowerCase().search(text.toLowerCase()) > -1 ||
           (row.email && row.email.toLowerCase().search(text.toLowerCase()) > -1)
         );
       });
     }
-    setNrOfRows(rowsFound);
+    setNrOfUsers(usersFound);
     setCurrentPageNumber(0);
   };
 
-  const changeToPageNumber = (pageNumber) => {
-    setCurrentPageNumber(pageNumber);
-  };
+  const changeToPageNumber = useCallback(
+    (pageNumber) => {
+      setCurrentPageNumber(pageNumber);
+    },
+    [setCurrentPageNumber]
+  );
 
-  const rowsToRender = nrOfRows
-    .map((row) => row)
+  const usersToDisplay = nrOfUsers
+    .map((user) => user)
     .slice(
-      currentPageNumber * rowsPerPage,
-      currentPageNumber * rowsPerPage + rowsPerPage
+      currentPageNumber * usersPerPage,
+      currentPageNumber * usersPerPage + usersPerPage
     );
 
   return (
     <div>
       <Search onSearch={searchUsers} />
-
       <UserTable>
-        {rowsToRender.map((row) => {
-          return <UserRow key={row.per_id} row={row} />;
+        {usersToDisplay.map((user) => {
+          return <UserRow key={user.per_id} user={user} />;
         })}
       </UserTable>
       <Pagination

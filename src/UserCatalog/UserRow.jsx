@@ -1,13 +1,15 @@
 import React from 'react';
 
-export const UserRow = ({ row }) => {
+const UserRowMemorized = ({ user }) => {
   return (
     <tr>
       <td>
-        <a href={row.edit_path}>{row.name1}</a>
+        <a href={user.edit_path}>{user.name1}</a>
         <br />
-        <small>{row.email}</small>
+        <small>{user.email}</small>
       </td>
     </tr>
   );
 };
+
+export const UserRow = React.memo(UserRowMemorized);
